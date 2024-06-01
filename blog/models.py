@@ -8,6 +8,8 @@ class User(models.Model):
     email = models.EmailField()
     # profile pic
     description = models.TextField()
+    createAt = models.DateTimeField(auto_now_add=True)
+    updateAt = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.firstName} {self.lastName}"
@@ -24,7 +26,10 @@ class Post(models.Model):
     createAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=False)
-    numOfViews = models.IntegerField(default=0)
+    viewCount = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ('-pubDate',)
 
     def __str__(self):
         return self.title
@@ -36,6 +41,7 @@ class Comment(models.Model):
     email = models.EmailField()
     userWebSite = models.URLField()
     comment = models.TextField()
+    createAt = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
@@ -43,3 +49,5 @@ class Comment(models.Model):
 
 class Tags(models.Model):
     name = models.CharField(max_length=30)
+    createAt = models.DateTimeField(auto_now_add=True)
+    updateAt = models.DateTimeField(auto_now=True)

@@ -5,6 +5,6 @@ app_name = 'blog'
 
 urlpatterns = [
     path('', blogIndex, name='blogIndex'),
-    path('single', singleView, name='singleView'),
+    path('title="<int:postId>"', singleView, name='singleView'),
     path('contact', contactView, name='blogContact')
 ]
