@@ -6,7 +6,7 @@ class User(models.Model):
     lastName = models.CharField(max_length=100)
     birthday = models.DateField()
     email = models.EmailField()
-    # profile pic
+    image = models.ImageField(upload_to='users/%Y/%m/%d/', default='users/default.jpg')
     description = models.TextField()
     createAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
@@ -21,12 +21,14 @@ class Post(models.Model):
     content = models.TextField()
     # tags
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    # images
+    image = models.ImageField(upload_to='blog/%Y/%m/%d/', default='blog/default.jpg')
     pubDate = models.DateTimeField()
     createAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=False)
     viewCount = models.IntegerField(default=0)
+
+
 
     class Meta:
         ordering = ('-pubDate',)

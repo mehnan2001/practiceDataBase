@@ -24,7 +24,7 @@
                         </div><!-- end title -->
 
                         <div class="single-post-media">
-                            <img src={% static "upload/market_blog_06.jpg" %} alt="" class="img-fluid">
+                            <img src="{{ post.image.url }}" alt="" class="img-fluid">
                         </div><!-- end media -->
 
                         <div class="blog-content">
@@ -64,7 +64,7 @@
                             <h4 class="small-title">About author</h4>
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                    <img src={% static "upload/author.jpg" %} alt="" class="img-fluid rounded-circle">
+                                    <img src="{{ author.image.url }}" alt="" class="img-fluid rounded-circle">
                                 </div><!-- end col -->
 
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
@@ -91,7 +91,7 @@
                                         <div class="comments-list">
                                             <div class="media">
                                                 <a class="media-left" href="#">
-                                                    <img src={% static "upload/author.jpg" %} alt=""
+                                                    <img src="{{ author.image.url }}" alt=""
                                                          class="rounded-circle">
                                                 </a>
                                                 <div class="media-body">

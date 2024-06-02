@@ -1,11 +1,12 @@
+from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 from blog.models import *
-from datetime import datetime
 
 
 def blogIndex(requests):
     # posts = Post.objects.all()
-    posts = Post.objects.filter(pubDate__lte=datetime.now())
+    posts = Post.objects.filter(pubDate__lte=timezone.now(), status=True)
+
 
     content = {
         'posts': posts
@@ -14,7 +15,7 @@ def blogIndex(requests):
 
 
 def singleView(requests, postId):
-    post = get_object_or_404(Post, pk=postId, pubDate__lte=datetime.now())
+    post = get_object_or_404(Post, pk=postId, status=True, pubDate__lte=timezone.now())
     author = User.objects.get(id=post.author.id)
     comments = Comment.objects.filter(post=post)
 
