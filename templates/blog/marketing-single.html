@@ -16,7 +16,7 @@
                             <h3>{{ post.title }}</h3>
 
                             <div class="blog-meta big-meta">
-                                <small><a href="#" title="">{{ post.pubDate }}</a></small>
+                                <small><a href="#" title="">{{ post.pubDate | date:"D d M Y" }}</a></small>
                                 <small><a href="#" title="">by {{ author }}</a></small>
                                 <small><a href="#" title=""><i class="fa fa-eye"></i> {{ post.viewCount }} </a></small>
 
@@ -145,50 +145,14 @@
 
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                     <div class="sidebar">
-                        <div class="widget-no-style">
-                            <div class="newsletter-widget text-center align-self-center">
-                                <h3>Subscribe Today!</h3>
-                                <p>Subscribe to our weekly Newsletter and receive updates via email.</p>
-                                <form class="form-inline" method="post">
-                                    <input type="text" name="email" placeholder="Add your email here.." required
-                                           class="form-control"/>
-                                    <input type="submit" value="Subscribe" class="btn btn-default btn-block"/>
-                                </form>
-                            </div><!-- end newsletter -->
-                        </div>
 
-                        <div class="widget">
-                        <h2 class="widget-title">Recent Posts</h2>
-                        <div class="blog-list-widget">
-                            <div class="list-group">
-                                {% for recent in recentPost %}
-                                <a href="{% url 'blog:singleView' postId=recent.id %}"
-                                   class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="w-100 justify-content-between">
-                                        <img src= "media/{{ recent.image }}" alt="" class="img-fluid float-left">
-                                        <h5 class="mb-1">{{ recent.title }}</h5>
-
-                                        <small>{{ recent.pubDate }}</small>
-                                    </div>
-                                </a>
-                                {% endfor %}
-
-                            </div>
-                        </div><!-- end blog-list -->
-                    </div><!-- end widget -->
+                    {% include 'blog/blog-subscribe.html' %}
 
 
-                        <div class="widget">
-                        <h2 class="widget-title">Popular Categories</h2>
-                        <div class="link-widget">
+                        {% include 'blog/blog-recentPost.html' %}
 
-                            {% for cat in category %}
-                            <ul>
-                                <li><a href="#">{{ cat.name }} <span>({{ cat.repetitions }})</span></a></li>
-                            </ul>
-                            {% endfor %}
-                        </div><!-- end link-widget -->
-                    </div><!-- end widget -->
+                        {% include 'blog/blog-popularCategories.html' %}
+
                     </div><!-- end sidebar -->
                 </div><!-- end col -->
             </div><!-- end row -->

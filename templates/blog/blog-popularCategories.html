@@ -1,0 +1,13 @@
+{% load static %}
+
+<div class="widget">
+    <h2 class="widget-title">Popular Categories</h2>
+    <div class="link-widget">
+
+        {% for cat in category %}
+            <ul>
+                <li><a href="#">{{ cat.name }} <span>({{ cat.repetitions }})</span></a></li>
+            </ul>
+        {% endfor %}
+    </div><!-- end link-widget -->
+</div><!-- end widget -->

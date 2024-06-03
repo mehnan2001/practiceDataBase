@@ -105,7 +105,7 @@
                                             <img src="media/{{ recent.image }}" alt="" class="img-fluid
                                         float-left">
                                             <h5 class="mb-1">{{ recent.title }}</h5>
-                                            <small>{{ recent.pubDate }}</small>
+                                            <small>{{ recent.pubDate | date:"D d M Y" }}</small>
                                         </div>
                                     </a>
                                 {% endfor %}
