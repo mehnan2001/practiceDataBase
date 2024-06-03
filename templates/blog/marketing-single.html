@@ -158,32 +158,37 @@
                         </div>
 
                         <div class="widget">
-                            <h2 class="widget-title">Recent Posts</h2>
-                            <div class="blog-list-widget">
-                                <div class="list-group">
+                        <h2 class="widget-title">Recent Posts</h2>
+                        <div class="blog-list-widget">
+                            <div class="list-group">
+                                {% for recent in recentPost %}
+                                <a href="{% url 'blog:singleView' postId=recent.id %}"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="w-100 justify-content-between">
+                                        <img src= "media/{{ recent.image }}" alt="" class="img-fluid float-left">
+                                        <h5 class="mb-1">{{ recent.title }}</h5>
 
-                                    <a href="#"
-                                       class="list-group-item list-group-item-action flex-column align-items-start">
-                                        <div class="w-100 last-item justify-content-between">
-                                            <img src={% static "upload/small_09.jpg" %} alt=""
-                                                 class="img-fluid float-left">
-                                            <h5 class="mb-1">Did you see the most beautiful sea in the world?</h5>
-                                            <small>07 Jan, 2016</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div><!-- end blog-list -->
-                        </div><!-- end widget -->
+                                        <small>{{ recent.pubDate }}</small>
+                                    </div>
+                                </a>
+                                {% endfor %}
+
+                            </div>
+                        </div><!-- end blog-list -->
+                    </div><!-- end widget -->
 
 
                         <div class="widget">
-                            <h2 class="widget-title">Popular Categories</h2>
-                            <div class="link-widget">
-                                <ul>
-                                    <li><a href="#">Marketing <span>(21)</span></a></li>
-                                </ul>
-                            </div><!-- end link-widget -->
-                        </div><!-- end widget -->
+                        <h2 class="widget-title">Popular Categories</h2>
+                        <div class="link-widget">
+
+                            {% for cat in category %}
+                            <ul>
+                                <li><a href="#">{{ cat.name }} <span>({{ cat.repetitions }})</span></a></li>
+                            </ul>
+                            {% endfor %}
+                        </div><!-- end link-widget -->
+                    </div><!-- end widget -->
                     </div><!-- end sidebar -->
                 </div><!-- end col -->
             </div><!-- end row -->

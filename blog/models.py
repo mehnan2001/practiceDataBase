@@ -21,6 +21,9 @@ class Tags(models.Model):
     createAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"{self.name} ({self.repetitions})"
+
     class Meta:
         ordering = ('-repetitions',)
 

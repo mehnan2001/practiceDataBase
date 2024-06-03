@@ -43,7 +43,6 @@
 
                                 <h4><a href= "{% url 'blog:singleView' postId=post.id %}">{{ post.title }}</a></h4>
                                 <p>{{ post.content }}</p>
-                                <p>{{ post.image.url }}</p>
                                 <small><a href="#" title="">{{ post.pubDate }}</a></small>
                                 <small><a href="#" title="">by {{ post.author }}</a></small>
                                 <small><a href="#" title=""><i class="fa fa-eye"></i> {{ post.viewCount }}</a></small>

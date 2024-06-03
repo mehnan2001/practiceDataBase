@@ -3,8 +3,9 @@ from django.shortcuts import render, get_object_or_404
 from blog.models import *
 from django.db.models import Count
 
-category = Tags.objects.values('name', 'repetitions').annotate(disease_count=Count('name')).order_by('-repetitions')[:5]
-recentPost = Post.objects.values('id', 'title', 'pubDate', 'image').order_by('-pubDate').filter(
+category = Tags.objects.values('name', 'repetitions').annotate(
+    disease_count=Count('name')).order_by('-repetitions')[:5]
+recentPost = Post.objects.values('id', 'title', 'pubDate', 'image').filter(
     pubDate__lte=timezone.now(), status=True)[:3]
 
 
@@ -53,7 +54,6 @@ def singleView(requests, postId):
         'comments': comments,
         'category': category,
         'recentPost': recentPost,
-        'posts': posts,
         'prevPost': prevPost,
         'nextPost': nextPost
     }
