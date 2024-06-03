@@ -15,11 +15,21 @@ class User(models.Model):
         return f"{self.firstName} {self.lastName}"
 
 
+class Tags(models.Model):
+    name = models.CharField(max_length=30)
+    repetitions = models.IntegerField(default=0)
+    createAt = models.DateTimeField(auto_now_add=True)
+    updateAt = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-repetitions',)
+
+
 class Post(models.Model):
     subject = models.CharField(max_length=20)
     title = models.CharField(max_length=255)
     content = models.TextField()
-    # tags
+    tags = models.ManyToManyField(Tags)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='blog/%Y/%m/%d/', default='blog/default.jpg')
     pubDate = models.DateTimeField()
@@ -27,8 +37,6 @@ class Post(models.Model):
     updateAt = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=False)
     viewCount = models.IntegerField(default=0)
-
-
 
     class Meta:
         ordering = ('-pubDate',)
@@ -47,9 +55,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class Tags(models.Model):
-    name = models.CharField(max_length=30)
-    createAt = models.DateTimeField(auto_now_add=True)
-    updateAt = models.DateTimeField(auto_now=True)
