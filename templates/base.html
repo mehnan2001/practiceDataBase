@@ -1,4 +1,5 @@
 {% load static %}
+{% load blogTags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -71,6 +72,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'blog:blogContact' %}">Contact Us</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'blog:index' %}">Index</a>
+                        </li>
                     </ul>
                     <form class="form-inline">
                         <input class="form-control mr-sm-2" type="text" placeholder="How may I help?">
@@ -93,26 +97,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                    <div class="widget">
-                        <h2 class="widget-title">Recent Posts</h2>
-                        <div class="blog-list-widget">
-                            <div class="list-group">
 
-                                {% for recent in recentPost %}
-                                    <a href="{% url 'blog:singleView' postId=recent.id %}"
-                                       class="list-group-item list-group-item-action flex-column align-items-start">
-                                        <div class="w-100 last-item justify-content-between">
-                                            <img src="media/{{ recent.image }}" alt="" class="img-fluid
-                                        float-left">
-                                            <h5 class="mb-1">{{ recent.title }}</h5>
-                                            <small>{{ recent.pubDate | date:"D d M Y" }}</small>
-                                        </div>
-                                    </a>
-                                {% endfor %}
+                    {% recentPost %}
 
-                            </div>
-                        </div><!-- end blog-list -->
-                    </div><!-- end widget -->
                 </div><!-- end col -->
 
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
@@ -122,46 +109,38 @@
                             <h2 class="widget-title">About Us</h2>
                         </a>
 
-                            <div class="blog-list-widget">
-                                <div class="list-group">
+                        <div class="blog-list-widget">
+                            <div class="list-group">
 
-                                    <div class="w-100 last-item justify-content-between">
-                                        <h5 class="mb-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                            Atque, commodi, corporis id libero nostrum officia pariatur, quaerat sed
-                                            temporibus veniam voluptas voluptates. Ducimus enim est incidunt nesciunt
-                                            tempore vero voluptatem voluptates. Adipisci distinctio dolorum ducimus
-                                            eaque maiores non, nostrum voluptatum. Ipsa libero, repellat. Aliquam
-                                            architecto, dolore in minus quis repellendus.</h5>
-                                    </div>
-                    </div>
-                </div><!-- end blog-list -->
-            </div><!-- end widget -->
-        </div><!-- end col -->
+                                <div class="w-100 last-item justify-content-between">
+                                    <h5 class="mb-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Atque, commodi, corporis id libero nostrum officia pariatur, quaerat sed
+                                        temporibus veniam voluptas voluptates. Ducimus enim est incidunt nesciunt
+                                        tempore vero voluptatem voluptates. Adipisci distinctio dolorum ducimus
+                                        eaque maiores non, nostrum voluptatum. Ipsa libero, repellat. Aliquam
+                                        architecto, dolore in minus quis repellendus.</h5>
+                                </div>
+                            </div>
+                        </div><!-- end blog-list -->
+                    </div><!-- end widget -->
+                </div><!-- end col -->
 
-        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-            <div class="widget">
-                <h2 class="widget-title">Popular Categories</h2>
-                <div class="link-widget">
-                    {% for cat in category %}
-                            <ul>
-                                <li><a href="#">{{ cat.name }} <span>({{ cat.repetitions }})</span></a></li>
-                            </ul>
-                            {% endfor %}
-                </div><!-- end link-widget -->
-            </div><!-- end widget -->
-        </div><!-- end col -->
-</div><!-- end row -->
-<div class="row">
-    <div class="col-md-12 text-center">
-        <br>
-        <br>
-        <div class="copyright">&copy; Markedia. Design: <a href="http://html.design">HTML Design</a>.</div>
-    </div>
-</div>
-</div><!-- end container -->
-</footer><!-- end footer -->
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
 
-<div class="dmtop">Scroll to Top</div>
+                {% popCat %}
+
+                </div><!-- end col -->
+            </div><!-- end row -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <br>
+                    <br>
+                    <div class="copyright">&copy; Markedia. Design: <a href="http://html.design">HTML Design</a>.</div>
+                </div>
+            </div>
+        </div><!-- end container -->
+    </footer><!-- end footer -->
+
 
 </div><!-- end wrapper -->
 

@@ -1,88 +1,95 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load blogTags %}
 
 
 {% block content %}
-<div class="page-title db">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                <h2> Blog <small class="hidden-xs-down hidden-sm-down">for All </small></h2>
-            </div><!-- end col -->
+    <div class="page-title db">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <h2> Blog <small class="hidden-xs-down hidden-sm-down">for All </small></h2>
+                </div><!-- end col -->
 
-        </div><!-- end row -->
-    </div><!-- end container -->
-</div><!-- end page-title -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end page-title -->
 
-<section class="section lb">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                <div class="page-wrapper">
-                    <div class="blog-custom-build">
+    <section class="section lb">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                    <div class="page-wrapper">
+                        <div class="blog-custom-build">
 
-                        {% for post in posts %}
+                            {% for post in posts %}
 
-                        <div class="blog-box wow fadeIn">
-                            <div class="post-media">
-                                <a href= "{% url 'blog:singleView' postId=post.id %}">
-                                    <img src="{{ post.image.url }}" alt="" class="img-fluid">
-                                    <div class="hovereffect">
-                                        <span></span>
+                                <div class="blog-box wow fadeIn">
+                                    <div class="post-media">
+                                        <a href="{% url 'blog:singleView' postId=post.id %}">
+                                            <img src="{{ post.image.url }}" alt="" class="img-fluid">
+                                            <div class="hovereffect">
+                                                <span></span>
+                                            </div>
+                                            <!-- end hover -->
+                                        </a>
                                     </div>
-                                    <!-- end hover -->
-                                </a>
-                            </div>
-                            <!-- end media -->
-                            <div class="blog-meta big-meta text-center">
+                                    <!-- end media -->
+                                    <div class="blog-meta big-meta text-center">
 
-                                <h4><a href= "{% url 'blog:singleView' postId=post.id %}">{{ post.title }}</a></h4>
-                                <p>{{ post.content|truncatewords:15 }}</p>
-                                <small><a href="#" title="">{{ post.pubDate | date:"D d M Y" }}</a></small>
-                                <small><a href="#" title="">by {{ post.author }}</a></small>
-                                <small><a href="#" title=""><i class="fa fa-eye"></i> {{ post.viewCount }}</a></small>
-                            </div><!-- end meta -->
-                        </div><!-- end blog-box -->
-                        <hr class="invis">
+                                        <h4><a href="{% url 'blog:singleView' postId=post.id %}">{{ post.title }}</a>
+                                        </h4>
+                                        <p>{{ post.content|truncatewords:15 }}</p>
+                                        <small><a href="#" title="">{{ post.pubDate | date:"D d M Y" }}</a></small>
+                                        <small><a href="#" title="">by {{ post.author }}</a></small>
+                                        <small><a href="#" title=""><i class="fa fa-eye"></i> {{ post.viewCount }}
+                                        </a></small>
 
-                        {% endfor %}
+                                    </div><!-- end meta -->
+
+                                </div><!-- end blog-box -->
+                                <hr class="invis">
 
 
+                            {% endfor %}
+
+
+                        </div>
                     </div>
-                </div>
 
-                <hr class="invis">
+                    <hr class="invis">
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
 
-                                <li class="page-item">
-                                    <a class="page-link" href="">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end col -->
+                                    <li class="page-item">
+                                        <a class="page-link" href="">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+                </div><!-- end col -->
 
-            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                <div class="sidebar">
-
-                    {% include 'blog/blog-subscribe.html' %}
-
-                    {% include 'blog/blog-recentPost.html' %}
-
-                    {% include 'blog/blog-popularCategories.html' %}
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                    <div class="sidebar">
 
 
-                </div><!-- end sidebar -->
-            </div><!-- end col -->
-        </div><!-- end row -->
-    </div><!-- end container -->
-</section>
+                        {% subscribe %}
+
+                        {% recentPost %}
+
+                        {% popCat %}
+
+
+                    </div><!-- end sidebar -->
+                </div><!-- end col -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </section>
 
 {% endblock %}
 

@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load blogTags %}
 
 {% block content %}
+
 
     <section class="section lb m3rem">
         <div class="container">
@@ -44,7 +46,7 @@
 
                                 {% for tag in post.tags.all %}
 
-                                <small><a href="#" title="">{{ tag.name }}</a></small>
+                                <small><a href="{% url 'blog:category' catName=tag.name %}" title="">{{ tag.name }}</a></small>
                                 {% endfor %}
                             </div><!-- end meta -->
 
@@ -146,12 +148,11 @@
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                     <div class="sidebar">
 
-                    {% include 'blog/blog-subscribe.html' %}
+                    {% subscribe %}
 
+                    {% recentPost %}
 
-                        {% include 'blog/blog-recentPost.html' %}
-
-                        {% include 'blog/blog-popularCategories.html' %}
+                    {% popCat %}
 
                     </div><!-- end sidebar -->
                 </div><!-- end col -->

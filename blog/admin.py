@@ -5,9 +5,11 @@ from blog.models import *
 class PostAdmin(admin.ModelAdmin):
     date_hierarchy = 'createAt'
     list_display = (
-    'id', 'subject', 'title', 'author', 'createAt', 'updateAt', 'pubDate', 'status', 'image', 'viewCount')
+        'id', 'subject', 'title', 'author', 'createAt', 'updateAt', 'pubDate', 'status', 'image', 'viewCount')
     search_fields = ('subject', 'title', 'content', 'author')
     list_filter = ('subject', 'pubDate')
+
+
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -20,7 +22,7 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 class TagAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'repetitions')
+    list_display = ('id', 'name')
 
 
 admin.site.register(Tags, TagAdmin)

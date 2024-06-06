@@ -17,15 +17,11 @@ class User(models.Model):
 
 class Tags(models.Model):
     name = models.CharField(max_length=30)
-    repetitions = models.IntegerField(default=0)
     createAt = models.DateTimeField(auto_now_add=True)
     updateAt = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.name} ({self.repetitions})"
-
-    class Meta:
-        ordering = ('-repetitions',)
+        return self.name
 
 
 class Post(models.Model):

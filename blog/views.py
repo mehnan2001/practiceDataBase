@@ -1,21 +1,20 @@
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 from blog.models import *
-from django.db.models import Count
-
-category = Tags.objects.values('name', 'repetitions').annotate(
-    disease_count=Count('name')).order_by('-repetitions')[:5]
-recentPost = Post.objects.values('id', 'title', 'pubDate', 'image').filter(
-    pubDate__lte=timezone.now(), status=True)[:3]
 
 
-def blogIndex(requests):
-    # posts = Post.objects.all()
+def index(request):
+    return render(request, 'index.html')
+def blogIndex(requests, **kwargs):
     posts = Post.objects.filter(pubDate__lte=timezone.now(), status=True)
+
+    if kwargs.get('catName') is not None:
+        posts = Post.objects.filter(pubDate__lte=timezone.now(), status=True, tags__name=kwargs.get('catName'))
+    if kwargs.get('authorId') is not None:
+        posts = Post.objects.filter(pubDate__lte=timezone.now(), status=True, author=kwargs.get('authorId'))
+
     content = {
         'posts': posts,
-        'category': category,
-        'recentPost': recentPost
     }
     return render(requests, 'blog/marketing-blog.html', content)
 
@@ -52,8 +51,6 @@ def singleView(requests, postId):
         'post': post,
         'author': author,
         'comments': comments,
-        'category': category,
-        'recentPost': recentPost,
         'prevPost': prevPost,
         'nextPost': nextPost
     }
@@ -62,8 +59,4 @@ def singleView(requests, postId):
 
 
 def contactView(requests):
-    content = {
-        'category': category,
-        'recentPost': recentPost
-    }
-    return render(requests, 'blog/marketing-contact.html', content)
+    return render(requests, 'blog/marketing-contact.html')
