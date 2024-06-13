@@ -1,10 +1,16 @@
+from django.contrib import messages
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 from blog.models import *
+from blog.forms import ContactForm
 
 
 def index(request):
     return render(request, 'index.html')
+
+
 def blogIndex(requests, **kwargs):
     posts = Post.objects.filter(pubDate__lte=timezone.now(), status=True)
 
@@ -12,6 +18,16 @@ def blogIndex(requests, **kwargs):
         posts = Post.objects.filter(pubDate__lte=timezone.now(), status=True, tags__name=kwargs.get('catName'))
     if kwargs.get('authorId') is not None:
         posts = Post.objects.filter(pubDate__lte=timezone.now(), status=True, author=kwargs.get('authorId'))
+
+    posts = Paginator(posts, 3)
+
+    try:
+        pageNumber = requests.GET.get('page')
+        posts = posts.get_page(pageNumber)
+    except PageNotAnInteger:
+        posts = posts.get_page(2)
+    except EmptyPage:
+        posts = posts.get_page(2)
 
     content = {
         'posts': posts,
@@ -59,4 +75,22 @@ def singleView(requests, postId):
 
 
 def contactView(requests):
-    return render(requests, 'blog/marketing-contact.html')
+
+    if requests.method == 'POST':
+        form = ContactForm(requests.POST)
+
+        if form.is_valid():
+            form = form.cleaned_data
+            form['name'] = 'Anonymous'
+
+            ContactUs.objects.create(name=form['name'],
+                                     email=form['email'],
+                                     phoneNumber=form['phoneNumber'],
+                                     subject=form['subject'],
+                                     message=form['message'])
+
+            messages.success(requests, "Information was sent successfully!")
+            return HttpResponseRedirect('/contact')
+
+    form = ContactForm()
+    return render(requests, 'blog/marketing-contact.html', {'form': form})

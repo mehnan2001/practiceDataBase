@@ -25,7 +25,12 @@ class TagAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
 
 
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'email', 'subject', 'message')
+
+
 admin.site.register(Tags, TagAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(ContactUs, ContactAdmin)

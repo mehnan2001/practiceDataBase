@@ -37,3 +37,4 @@ def recentPostForIndex(count=3):
     posts = Post.objects.filter(
         pubDate__lte=timezone.now(), status=True)[:count]
     return {'posts': posts}
+

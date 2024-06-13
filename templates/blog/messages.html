@@ -1,0 +1,25 @@
+{% load static %}
+
+{% for message in messages %}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% if message.tags == 'success' %}
+        <script>
+            var text = "{{ message }}";
+
+            Swal.fire({
+                text: text,
+                icon: "success"
+            });
+        </script>
+    {% elif message.tags == 'error' %}
+        <script>
+            var text = "{{ message }}";
+
+            Swal.fire({
+                text: text,
+                icon: "error"
+            });
+        </script>
+    {% endif %}
+{% endfor %}
